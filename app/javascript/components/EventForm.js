@@ -34,10 +34,12 @@ class EventForm extends React.Component {
     e.preventDefault();
     const { event } = this.state;
     const errors = validateEvent(event);
+
     if (!isEmptyObject(errors)) {
       this.setState({ errors });
     } else {
-      console.log(event);
+      const { onSubmit } = this.props;
+      onSubmit(event);
     }
   }
 
@@ -162,6 +164,7 @@ class EventForm extends React.Component {
 
 EventForm.propTypes = {
   event: PropTypes.shape(),
+  onSubmit: PropTypes.func.isRequired,
 };
 
 EventForm.defaultProps = {
